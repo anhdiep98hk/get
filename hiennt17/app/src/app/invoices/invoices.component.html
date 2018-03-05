@@ -1,0 +1,73 @@
+<div>
+  <div class="row">
+    <div class="col-md-6">
+      <button (click)="onCheck()" type="button" class="btn btn-success"  >Add new </button>
+    </div>
+    <div class="col-md-6 form-inline">
+      Search Customer Name:<input type="search" class="form-control" [formControl]="searchBy">
+    </div>
+  </div>
+
+  <div *ngIf="checkAdd">
+    <form class="form-horizontal" (ngSubmit)="onSubmit()" [formGroup]="invoiceForm">
+      <div formGroupName="id">
+        <div class="form-group">
+          <label>Customer ID</label>
+          <!--<input class="form-control" type="text" ngModel name="cusName">-->
+          <select name="name" class="form-control" formControlName="cusId">
+            <option *ngFor="let cus of customers" [value]="cus.cusId">{{cus.cusName}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Product ID</label>
+          <select name="name"  class="form-control" formControlName="proId" >
+            <option *ngFor="let pro of products" [value]="pro.proId">{{pro.proName}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Numbers</label>
+        <input class="form-control" type="number" formControlName="numbers"  name="numbers">
+      </div>
+
+      <!--<div class="form-group">-->
+        <!--<label>Date</label>-->
+        <!--<input class="form-control" type="datetime-local" formControlName="issueDate"  name="issueDate">-->
+      <!--</div>-->
+
+      <div class="form-group">
+        <label>ToTal</label>
+        <input class="form-control" type="number" formControlName="totalPayment"  name="totalPayment">
+      </div>
+
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>STT</th>
+      <th>CustomerName</th>
+      <th>ProductName</th>
+      <th>Numbers</th>
+      <th>DateTime</th>
+      <th>Total</th>
+      <th>option</th>
+    </tr>
+    </thead>
+    <!--<tr *ngFor="let inv of invoice; trackBy: contactTrackByFn"-->
+        <!--[class.selected]="cus.cusId === selectedId" [routerLink]="['/cus', cus.cusId]">-->
+    <tr *ngFor="let inv of invoice; trackBy: contactTrackByFn; index as i"
+        [routerLink]="['/inv', inv.id.cusId,inv.id.proId]">
+      <td>{{i+1}}</td>
+      <td>{{inv.tblCustomer.cusName}}</td>
+      <td>{{ inv.tblProduct.proName }}</td>
+      <td>{{ inv.numbers }}</td>
+      <td>{{ inv.issueDate | date: 'dd/MM/yyyy - hh:mm:ss.SSS' }}</td>
+      <td>{{ inv.totalPayment }}</td>
+      <td><button type="button" class="btn btn-danger" (click)="delete(inv.id.cusId, inv.id.proId); $event.stopPropagation()">Delete</button></td>
+    </tr>
+  </table>
+</div>

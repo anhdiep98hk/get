@@ -1,0 +1,43 @@
+<div>
+  <div class="row">
+    <div class="col-md-6">
+      <button (click)="onCheck()" type="button" class="btn btn-success"  >Add new </button>
+    </div>
+    <div class="col-md-6 form-inline">
+      Search By Name:<input type="search" class="form-control" [formControl]="searchBy">
+    </div>
+  </div>
+  <div *ngIf="checkAdd">
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+      <div class="form-group">
+        <label>name</label>
+        <input class="form-control" type="text" ngModel name="proName">
+      </div>
+
+      <div class="form-group">
+        <label>Price</label>
+        <input class="form-control" type="text" ngModel name="proUnitPrice">
+      </div>
+
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+  </div>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>price</th>
+      <th>option</th>
+    </tr>
+    </thead>
+    <tr *ngFor="let pro of products; trackBy: contactTrackByFn"
+        [class.selected]="pro.proId === selectedId" [routerLink]="['/pro', pro.proId]">
+      <td>{{ pro.proId }}</td>
+      <td>{{ pro.proName }}</td>
+      <td>{{ pro.proUnitPrice }}</td>
+      <td><button type="button" class="btn btn-danger" (click)="delete(pro.proId); $event.stopPropagation()">Delete</button></td>
+    </tr>
+  </table>
+</div>

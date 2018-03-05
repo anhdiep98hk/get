@@ -1,0 +1,76 @@
+
+<div>
+  <div class="row">
+    <div class="col-md-6">
+      <button (click)="onCheck()" type="button" class="btn btn-success"  >Add new </button>
+    </div>
+    <div class="col-md-6 form-inline">
+        Search By Name:<input type="search" class="form-control" [formControl]="searchBy">
+    </div>
+  </div>
+
+  <div *ngIf="checkAdd">
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+      <div class="form-group">
+        <label>name</label>
+        <input class="form-control" type="text" ngModel name="cusName">
+      </div>
+
+      <div class="form-group">
+        <label>address</label>
+        <input class="form-control" type="text" ngModel name="cusAddress">
+      </div>
+
+      <div class="form-group">
+        <label>City</label>
+        <input class="form-control" type="text" ngModel name="cusCity">
+      </div>
+
+      <div class="form-group">
+        <label>phone</label>
+        <input class="form-control" type="text" ngModel name="cusPhone">
+      </div>
+
+      <div class="form-group">
+        <label>state</label>
+        <input class="form-control" type="text" ngModel name="cusState">
+      </div>
+
+      <div class="form-group">
+        <label>zip</label>
+        <input class="form-control" type="text" ngModel name="cusZip">
+      </div>
+
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>stt</th>
+        <th>id</th>
+        <th>address</th>
+        <th>city</th>
+        <th>name</th>
+        <th>phone</th>
+        <th>state</th>
+        <th>zip</th>
+        <th>option</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let cus of customers; trackBy: contactTrackByFn; index as i"
+    [class.selected]="cus.cusId === selectedId" [routerLink]="['/cus', cus.cusId]">
+      <td>{{i+1}}</td>
+      <td>{{ cus.cusId }}</td>
+      <td>{{ cus.cusAddress }}</td>
+      <td>{{ cus.cusCity }}</td>
+      <td>{{ cus.cusName }}</td>
+      <td>{{ cus.cusPhone }}</td>
+      <td>{{ cus.cusState }}</td>
+      <td>{{ cus.cusZip }}</td>
+      <td><button type="button" class="btn btn-danger" (click)="delete(cus.cusId); $event.stopPropagation()">Delete</button></td>
+    </tr>
+  </table>
+
+</div>

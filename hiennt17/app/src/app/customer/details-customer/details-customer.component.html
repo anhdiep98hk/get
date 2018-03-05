@@ -1,0 +1,56 @@
+<div *ngIf="customernew">
+  <h1>Edit customer </h1>
+  <form class="form-horizontal" [formGroup]="customerData" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label>id</label>
+      <input class="form-control" type="text" formControlName="cusId" name="cusId" [attr.disabled]="true">
+    </div>
+    <div class="form-group">
+      <label>address</label>
+      <input class="form-control" type="text" formControlName="cusAddress"  name="cusAddress">
+    </div>
+
+    <div class="form-group">
+      <label>City</label>
+      <input class="form-control" type="text" formControlName="cusCity"  name="cusCity">
+    </div>
+
+    <div class="form-group">
+      <label>name</label>
+      <input class="form-control" type="text" formControlName="cusName" name="cusName">
+      <div class="alert alert-danger" *ngIf="customerData.get('cusName')?.errors?.required">Ban chua nhap Name!</div>
+      <div class="alert alert-danger" *ngIf="customerData.get('cusName')?.errors?.minlength">Phai co it nhat 2 ky tu!</div>
+      <div class="alert alert-danger" *ngIf="customerData.get('cusName')?.errors?.maxlength">Chi dai 10 ky tu!</div>
+    </div>
+
+    <div class="form-group">
+      <label>phone</label>
+      <input class="form-control" type="text" formControlName="cusPhone" name="cusPhone">
+      <div class="alert alert-danger" *ngIf="customerData.get('cusPhone')?.errors?.required">Ban chua nhap Phone!</div>
+      <div class="alert alert-danger" *ngIf="customerData.get('cusPhone')?.errors?.pattern">Phai nhap so, bat dau la so 0</div>
+      <div class="alert alert-danger" *ngIf="customerData.get('cusPhone')?.errors?.minlength">Phai it nhat 10</div>
+      <div class="alert alert-danger" *ngIf="customerData.get('cusPhone')?.errors?.maxlength">Phai dai toi da 11</div>
+    </div>
+
+    <div class="form-group">
+      <label>state</label>
+      <input class="form-control" type="text" formControlName="cusState" name="cusState">
+    </div>
+
+    <div class="form-group">
+      <label>zip</label>
+      <input class="form-control" type="text" formControlName="cusZip" name="cusZip">
+      <div class="alert alert-danger" *ngIf="customerData.get('cusZip')?.errors?.required">Ban chua nhap Zip!</div>
+      <div class="alert alert-danger" *ngIf="customerData.get('cusZip')?.errors?.pattern">Phai nhap so</div>
+      <div class="alert alert-danger" *ngIf="customerData.get('cusZip')?.errors?.minlength">Phai it nhat 9</div>
+      <div class="alert alert-danger" *ngIf="customerData.get('cusZip')?.errors?.maxlength">Phai dai toi da 12</div>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="customerData.invalid">Update</button>
+    <button type="button" class="btn btn-danger" (click)="back()" >Back</button>
+
+  </form>
+</div>
+
+

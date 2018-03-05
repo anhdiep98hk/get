@@ -1,0 +1,22 @@
+<div *ngIf="productDetail">
+  <h1>Details and edit product</h1>
+  <form class="form-horizontal" [formGroup]="productData" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Product-ID</label>
+      <input class="form-control" type="text" formControlName="proId" name="proId" [attr.disabled]="true">
+    </div>
+
+    <div class="form-group">
+      <label>Product-Name</label>
+      <input class="form-control" type="text" formControlName="proName"  name="proName">
+    </div>
+
+    <div class="form-group">
+      <label>Product-Price</label>
+      <input class="form-control" type="text" formControlName="proUnitPrice"  name="proUnitPrice">
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="productData.invalid">Update</button>
+    <button type="button" class="btn btn-danger" (click)="back()" >Back</button>
+  </form>
+</div>

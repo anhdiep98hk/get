@@ -1,0 +1,27 @@
+<div *ngIf="invoices">
+  <form class="form-horizontal" (ngSubmit)="onSubmit()" [formGroup]="invoiceForm">
+    <div formGroupName="id">
+      <div class="form-group">
+        <label>Customer ID</label>
+        <input class="form-control" type="text" formControlName="cusId" name="cusId" [attr.disabled]="true">
+      </div>
+
+      <div class="form-group">
+        <label>Product ID</label>
+        <input class="form-control" type="text" formControlName="proId" name="proId" [attr.disabled]="true">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Numbers</label>
+      <input class="form-control" type="number" formControlName="numbers"  name="numbers">
+    </div>
+
+    <div class="form-group">
+      <label>ToTal</label>
+      <input class="form-control" type="number" formControlName="totalPayment"  name="totalPayment">
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
